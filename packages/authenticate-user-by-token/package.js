@@ -1,12 +1,12 @@
 Package.describe({
   name: 'simple:authenticate-user-by-token',
-  version: '1.0.1',
+  version: '1.2.0',
 
   // Brief, one-line summary of the package.
   summary: 'Authenticate user via auth token',
 
   // URL to the Git repository containing the source code for this package.
-  git: '',
+  git: 'https://github.com/meteor-compat/meteor-rest',
 
   // By default, Meteor will default to using README.md for documentation.
   // To avoid submitting documentation, set this field to null.
@@ -14,11 +14,11 @@ Package.describe({
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.0');
+  api.versionsFrom('2.4');
 
   api.use([
-    'accounts-base@1.2.0',
-    'simple:json-routes@2.1.0',
+    'accounts-base',
+    'simple:json-routes@2.2.0',
   ], 'server');
 
   api.addFiles('auth.js', 'server');
