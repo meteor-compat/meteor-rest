@@ -1,6 +1,6 @@
 Package.describe({
   name: 'simple:json-routes',
-  version: '2.2.0',
+  version: '2.3.0',
 
   // Brief, one-line summary of the package.
   summary: 'The simplest way to define server-side routes that return JSON',
@@ -16,6 +16,8 @@ Package.describe({
 Npm.depends({
   connect: '3.7.0',
   'connect-route': '0.1.5',
+  'body-parser': '1.19.0',
+  'connect-query': '1.0.0',
 });
 
 Package.onUse(function (api) {

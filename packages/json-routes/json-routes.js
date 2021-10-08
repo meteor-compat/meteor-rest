@@ -3,12 +3,14 @@
 var Fiber = Npm.require('fibers');
 var connect = Npm.require('connect');
 var connectRoute = Npm.require('connect-route');
+var bodyParser = Npm.require('body-parser');
+var query = Npm.require('connect-query');
 
 JsonRoutes = {};
 
-WebApp.connectHandlers.use(connect.urlencoded({limit: '50mb'})); //Override default request size
-WebApp.connectHandlers.use(connect.json({limit: '50mb'})); //Override default request size
-WebApp.connectHandlers.use(connect.query());
+WebApp.connectHandlers.use(bodyParser.urlencoded({limit: '50mb'})); //Override default request size
+WebApp.connectHandlers.use(bodyParser.json({limit: '50mb'})); //Override default request size
+WebApp.connectHandlers.use(query());
 
 // Handler for adding middleware before an endpoint (JsonRoutes.middleWare
 // is just for legacy reasons). Also serves as a namespace for middleware
