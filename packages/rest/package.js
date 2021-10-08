@@ -1,12 +1,12 @@
 Package.describe({
   name: 'simple:rest',
-  version: '1.1.1',
+  version: '1.2.0',
 
   // Brief, one-line summary of the package.
   summary: 'The easiest way to add a REST API to your Meteor app',
 
   // URL to the Git repository containing the source code for this package.
-  git: 'https://github.com/stubailo/meteor-rest/blob/master/packages/rest/',
+  git: 'https://github.com/meteor-compat/meteor-rest',
 
   // By default, Meteor will default to using README.md for documentation.
   // To avoid submitting documentation, set this field to null.
@@ -14,7 +14,7 @@ Package.describe({
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.1.0.2');
+  api.versionsFrom('2.4');
 
   api.use([
     'check',
@@ -22,9 +22,9 @@ Package.onUse(function (api) {
     'ejson',
     'meteor',
     'mongo',
-    'simple:json-routes@2.1.0',
     'underscore',
     'webapp',
+    'simple:json-routes@2.2.0',
   ], 'server');
 
   api.use([
