@@ -5,6 +5,8 @@
 This repository provides versions for the package [simple:authenticate-user-by-token](https://github.com/meteor-compat/meteor-rest/tree/devel/packages/authenticate-user-by-token) that are compatible with latest Meteor. This is necessary because the author is not maintaining package anymore.
 
 ## Changes
+- v1.2.1
+  - Update simple:json-routes to 2.3.0
 - v1.2.0
   - `api.versionsFrom` on `Package.onUse` was changed from `1.0` to `2.4`.
   

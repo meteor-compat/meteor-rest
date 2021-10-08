@@ -1,6 +1,6 @@
 Package.describe({
   name: 'simple:rest-accounts-password',
-  version: '1.2.0',
+  version: '1.2.1',
 
   // Brief, one-line summary of the package.
   summary: 'Get a login token to use with simple:rest',
@@ -19,7 +19,7 @@ Package.onUse(function (api) {
   api.use([
     'accounts-password',
     'check',
-    'simple:json-routes@2.2.0',
+    'simple:json-routes@2.3.0',
     'simple:authenticate-user-by-token@1.2.0',
     'simple:rest-bearer-token-parser@1.1.0',
     'simple:rest-json-error-handler@1.1.0',

@@ -1,6 +1,6 @@
 Package.describe({
   name: 'simple:authenticate-user-by-token',
-  version: '1.2.0',
+  version: '1.2.1',
 
   // Brief, one-line summary of the package.
   summary: 'Authenticate user via auth token',
@@ -18,7 +18,7 @@ Package.onUse(function (api) {
 
   api.use([
     'accounts-base',
-    'simple:json-routes@2.2.0',
+    'simple:json-routes@2.3.0',
   ], 'server');
 
   api.addFiles('auth.js', 'server');
