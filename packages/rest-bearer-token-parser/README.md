@@ -2,7 +2,7 @@
 
 **Compatible with Meteor 2.4**
 
-This repository provides versions for the package [imple:rest-json-error-handler](https://github.com/meteor-compat/meteor-rest/tree/devel/packages/rest-bearer-token-parser) that are compatible with latest Meteor. This is necessary because the author is not maintaining package anymore.
+This repository provides versions for the package [simple:rest-json-error-handler](https://github.com/meteor-compat/meteor-rest/tree/devel/packages/rest-bearer-token-parser) that are compatible with latest Meteor. This is necessary because the author is not maintaining package anymore.
 
 ## Changes
 - v1.1.0
