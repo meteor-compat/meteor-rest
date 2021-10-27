@@ -5,6 +5,8 @@
 This repository provides versions for the package [simple:authenticate-user-by-token](https://github.com/meteor-compat/meteor-rest/tree/devel/packages/authenticate-user-by-token) that are compatible with latest Meteor. This is necessary because the author is not maintaining package anymore.
 
 ## Changes
+- v2.3.1
+  - Fixes "body-parser deprecated undefined extended"
 - v2.3.0
   - Npm dependencies updated
     ```txt
