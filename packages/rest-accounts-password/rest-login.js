@@ -13,7 +13,7 @@ JsonRoutes.add('post', '/users/login', function (req, res) {
   var options = req.body;
 
   var user;
-  if (options.hasOwnProperty('email')) {
+  if (options.email) {
     check(options, {
       email: String,
       password: String,
