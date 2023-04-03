@@ -12,17 +12,24 @@ JsonRoutes.add('options', '/users/login', function (req, res) {
 JsonRoutes.add('post', '/users/login', function (req, res) {
   var options = req.body;
 
+  const NonEmptyString = Match.Where(x => {
+    check(x, String);
+    return x.length > 0;
+  });
+
   var user;
   if (options.hasOwnProperty('email')) {
     check(options, {
       email: String,
       password: String,
+      code: Match.Optional(NonEmptyString),
     });
     user = Meteor.users.findOne({ 'emails.address': options.email });
   } else {
     check(options, {
       username: String,
       password: String,
+      code: Match.Optional(NonEmptyString),
     });
     user = Meteor.users.findOne({ username: options.username });
   }
@@ -40,6 +47,20 @@ JsonRoutes.add('post', '/users/login', function (req, res) {
 
   if (result.error) {
     throw result.error;
+  }
+  
+  if (Accounts._check2faEnabled?.(user)) {
+    if (!options.code) {
+      Accounts._handleError('2FA code must be informed', true, 'no-2fa-code');
+    }
+    if (
+      !Accounts._isTokenValid(
+        user.services.twoFactorAuthentication.secret,
+        options.code
+      )
+    ) {
+      Accounts._handleError('Invalid 2FA code', true, 'invalid-2fa-code');
+    }
   }
 
   var stampedLoginToken = Accounts._generateStampedLoginToken();
