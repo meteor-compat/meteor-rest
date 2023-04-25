@@ -91,6 +91,19 @@ if (Meteor.isServer) {
       }));
     },
 
+    // Test bug fix for #2
+    function (test, waitFor) {
+      HTTP.post(loginEndpoint, { params: {
+        username: 'seconduser',
+        password: 'test',
+      }, headers: {
+        "Content-Type": "application/x-www-form-urlencoded"
+      }, }, waitFor(function (err, res) {
+        // Make sure there is no error
+        test.equal(err, null);
+      }));
+    },
+
     function (test, waitFor) {
       HTTP.post(registerEndpoint, { data: {
         username: 'thirduser',
