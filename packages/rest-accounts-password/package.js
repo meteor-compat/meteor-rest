@@ -1,6 +1,6 @@
 Package.describe({
   name: 'simple:rest-accounts-password',
-  version: '1.2.1',
+  version: '1.2.2',
 
   // Brief, one-line summary of the package.
   summary: 'Get a login token to use with simple:rest',

@@ -5,6 +5,9 @@
 This repository provides versions for the package [simple:rest-accounts-password](https://github.com/meteor-compat/meteor-rest/tree/devel/packages/rest-accounts-password) that are compatible with latest Meteor. This is necessary because the author is not maintaining package anymore.
 
 ## Changes
+- v1.2.2
+  - Fixes users/login using cURL [#3](https://github.com/meteor-compat/meteor-rest/pull/3)
+  - 2FA support [#4](https://github.com/meteor-compat/meteor-rest/pull/4)
 - v1.2.1
   - Update simple:json-routes to 2.3.0
 - v1.2.0
