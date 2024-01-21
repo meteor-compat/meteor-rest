@@ -16,6 +16,7 @@ This repository provides versions for the package [simple:authenticate-user-by-t
     More info on `express.Router` can be found in the [official documentation](https://expressjs.com/en/api.html#router).
 
 **TODO**
+- Find a way to warn the user about the `req.route` breaking change.
 - Add other breaking changes as we identify them.
 - Update `README` in regard to middlewares.
 
