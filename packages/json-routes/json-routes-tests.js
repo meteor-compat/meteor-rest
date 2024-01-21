@@ -13,26 +13,34 @@ if (Meteor.isServer) {
   });
 } else {
   // Meteor.isClient
-  testAsyncMulti('JSON Routes - support case-insensitive HTTP method types', [
-    function (test, expect) {
-      HTTP.get('/case-insensitive-method-1', expect(function (err, res) {
-        test.equal(err, null);
-        test.equal(res.data, true);
-      }));
-    },
+  Tinytest.addAsync('JSON Routes - support case-insensitive HTTP method types - Method 1', async function (test) {
+    try {
+      const response = await fetch('/case-insensitive-method-1');
+      const data = await response.json();
+      test.equal(data, true);
+    } catch (err) {
+      test.fail('Fetch failed: ' + err);
+    }
+  });
 
-    function (test, expect) {
-      HTTP.get('/case-insensitive-method-2', expect(function (err, res) {
-        test.equal(err, null);
-        test.equal(res.data, true);
-      }));
-    },
+  Tinytest.addAsync('JSON Routes - support case-insensitive HTTP method types - Method 2', async function (test) {
+    try {
+      const response = await fetch('/case-insensitive-method-2');
+      const data = await response.json();
+      test.equal(data, true);
+    } catch (err) {
+      test.fail('Fetch failed: ' + err);
+    }
+  });
 
-    function (test, expect) {
-      HTTP.get('/case-insensitive-method-3', expect(function (err, res) {
-        test.equal(err, null);
-        test.equal(res.data, true);
-      }));
-    },
-  ]);
+  Tinytest.addAsync('JSON Routes - support case-insensitive HTTP method types - Method 3', async function (test) {
+    try {
+      const response = await fetch('/case-insensitive-method-3');
+      const data = await response.json();
+      test.equal(data, true);
+    } catch (err) {
+      test.fail('Fetch failed: ' + err);
+    }
+  });
+
 }

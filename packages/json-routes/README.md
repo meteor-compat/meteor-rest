@@ -1,10 +1,30 @@
 # Compatibility
 
-**Compatible with Meteor 2.4**
+**Compatible with Meteor 3.0**
 
 This repository provides versions for the package [simple:authenticate-user-by-token](https://github.com/meteor-compat/meteor-rest/tree/devel/packages/authenticate-user-by-token) that are compatible with latest Meteor. This is necessary because the author is not maintaining package anymore.
 
+## Breaking changes
+- v3.0.0 
+
+  - In the previous versions, `connect-route` returned `req.route` as [a string](https://github.com/baryshev/connect-route/blob/master/lib/connect-route.js) representing the path.
+  
+    After the migration to `express`, we use `express.Router()` instead, which returns `req.route` as an object.
+
+    So, in your `handler(request, response, next)` (see [API](#api) below), the request path can be found at `req.route.path`.
+
+    More info on `express.Router` can be found in the [official documentation](https://expressjs.com/en/api.html#router).
+
+**TODO**
+- Add other breaking changes as we identify them.
+- Update `README` in regard to middlewares.
+
 ## Changes
+- v3.0.0
+  - New `webapp` APIs available in [Meteor 3.0](https://github.com/meteor/meteor/blob/release-3.0/docs/generators/changelog/versions/3.0.md).
+  - Npm dependencies updated to reflect migration from `connect` to `express`.
+  - `Fibers` usage was removed and replaced with `async`/`await`.
+  - Deprecated `http` package replaced with `fetch` in tests.
 - v2.3.1
   - Fixes "body-parser deprecated undefined extended"
 - v2.3.0
