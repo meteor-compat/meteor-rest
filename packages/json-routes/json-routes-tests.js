@@ -11,6 +11,10 @@ if (Meteor.isServer) {
   JsonRoutes.add('get', 'case-insensitive-method-3', function (req, res) {
     JsonRoutes.sendResult(res, {data: true});
   });
+
+  JsonRoutes.add('get', 'query-parameters-method-1', function (req, res) {
+    JsonRoutes.sendResult(res, {data: req.query});
+  });
 } else {
   // Meteor.isClient
   Tinytest.addAsync('JSON Routes - support case-insensitive HTTP method types - Method 1', async function (test) {
@@ -43,4 +47,13 @@ if (Meteor.isServer) {
     }
   });
 
+  Tinytest.addAsync('JSON Routes - test query parameters parsing - Method 1', async function (test) {
+    try {
+      const response = await fetch('/query-parameters-method-1?foo=bar');
+      const data = await response.json();
+      test.equal(data.foo, 'bar');
+    } catch (err) {
+      test.fail('Fetch failed: ' + err);
+    }
+  });
 }

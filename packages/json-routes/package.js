@@ -16,7 +16,7 @@ Package.describe({
 Npm.depends({
   express: '4.18.2',
   'body-parser': '1.20.2',
-  'express-query-parser': '1.3.3',
+  'connect-query': '1.0.0',
 });
 
 Package.onUse(function (api) {

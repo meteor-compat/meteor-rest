@@ -2,14 +2,14 @@
 
 var express = Npm.require('express');
 var bodyParser = Npm.require('body-parser');
-var { queryParser } = Npm.require('express-query-parser');
+var query = Npm.require('connect-query');
 
 JsonRoutes = {};
 
 // Override default request size
 WebApp.handlers.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
 WebApp.handlers.use(bodyParser.json({ limit: '50mb' }));
-WebApp.handlers.use(queryParser());
+WebApp.handlers.use(query());
 
 // Handler for adding middleware before an endpoint.
 // Also serves as a namespace for middleware packages to declare their middleware functions.
