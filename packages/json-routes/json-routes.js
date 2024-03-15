@@ -1,33 +1,29 @@
 /* global JsonRoutes:true */
 
-var Fiber = Npm.require('fibers');
-var connect = Npm.require('connect');
-var connectRoute = Npm.require('connect-route');
+var express = Npm.require('express');
 var bodyParser = Npm.require('body-parser');
 var query = Npm.require('connect-query');
 
 JsonRoutes = {};
 
-WebApp.connectHandlers.use(bodyParser.urlencoded({limit: '50mb', extended: false})); //Override default request size
-WebApp.connectHandlers.use(bodyParser.json({limit: '50mb'})); //Override default request size
-WebApp.connectHandlers.use(query());
+// Override default request size
+WebApp.handlers.use(bodyParser.urlencoded({ limit: '50mb', extended: false }));
+WebApp.handlers.use(bodyParser.json({ limit: '50mb' }));
+WebApp.handlers.use(query());
 
-// Handler for adding middleware before an endpoint (JsonRoutes.middleWare
-// is just for legacy reasons). Also serves as a namespace for middleware
-// packages to declare their middleware functions.
-JsonRoutes.Middleware = JsonRoutes.middleWare = connect();
-WebApp.connectHandlers.use(JsonRoutes.Middleware);
+// Handler for adding middleware before an endpoint.
+// Also serves as a namespace for middleware packages to declare their middleware functions.
+JsonRoutes.Middleware = express();
+WebApp.handlers.use(JsonRoutes.Middleware);
 
 // List of all defined JSON API endpoints
 JsonRoutes.routes = [];
 
 // Save reference to router for later
-var connectRouter;
+var expressRouter = express.Router();
 
 // Register as a middleware
-WebApp.connectHandlers.use(Meteor.bindEnvironment(connectRoute(function (router) {
-  connectRouter = router;
-})));
+WebApp.handlers.use(expressRouter);
 
 // Error middleware must be added last, to catch errors from prior middleware.
 // That's why we cache them and then add after startup.
@@ -42,17 +38,17 @@ Meteor.startup(function () {
   _.each(errorMiddlewares, function (errorMiddleware) {
     errorMiddleware = _.map(errorMiddleware, function (maybeFn) {
       if (_.isFunction(maybeFn)) {
-        // A connect error middleware needs exactly 4 arguments because they use fn.length === 4 to
+        // Express error middleware needs exactly 4 arguments because they use fn.length === 4 to
         // decide if something is an error middleware.
-        return function (a, b, c, d) {
-          Meteor.bindEnvironment(maybeFn)(a, b, c, d);
+        return function (err, req, res, next) {
+          maybeFn(err, req, res, next);
         }
       }
 
       return maybeFn;
     });
 
-    WebApp.connectHandlers.use.apply(WebApp.connectHandlers, errorMiddleware);
+    WebApp.handlers.use.apply(WebApp.handlers, errorMiddleware);
   });
 
   errorMiddlewares = [];
@@ -70,16 +66,14 @@ JsonRoutes.add = function (method, path, handler) {
     path: path,
   });
 
-  connectRouter[method.toLowerCase()](path, function (req, res, next) {
+  expressRouter[method.toLowerCase()](path, async function (req, res, next) {
     // Set headers on response
     setHeaders(res, responseHeaders);
-    Fiber(function () {
-      try {
-        handler(req, res, next);
-      } catch (error) {
-        next(error);
-      }
-    }).run();
+    try {
+      await handler(req, res, next);
+    } catch (error) {
+      next(error);
+    }
   });
 };
 
